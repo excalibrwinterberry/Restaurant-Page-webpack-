@@ -1,8 +1,9 @@
 import homePage from "./homePage"
 import menuPage from "./menuPage"
 import aboutPage from "./aboutPage"
+import './style.css'
 
-function clearTag(tagName) {
+const clearTag = tagName =>{
       
     while(tagName.firstChild) {
         tagName.removeChild(tagName.firstChild);
@@ -10,49 +11,62 @@ function clearTag(tagName) {
 }
 
 const handleHomeEvent = (e) =>{
-    console.log('home')
+
     clearTag(page)
     page.appendChild(homePage())
 }
 
 const handleMenuEvent = (e) =>{
-    console.log('menu')
+
     clearTag(page)
     page.appendChild(menuPage())
 }
 
 const handleAboutEvent = (e) =>{
-    console.log('about')
+
     clearTag(page)
     page.appendChild(aboutPage())
 }
 
-const content = document.getElementById('content')
+const RestarantPage = (() =>{
+    const content = document.getElementById('content')
 
-const page = document.createElement('div')
-page.setAttribute('id', 'page')
+    const page = document.createElement('div')
+    page.setAttribute('id', 'page')
 
-const tabSwitch = document.createElement('div')
-tabSwitch.setAttribute('id', 'tabs')
+    const tabSwitch = document.createElement('div')
+    tabSwitch.classList.add('tabs')
 
-const homeBtn = document.createElement('button')
-homeBtn.textContent = 'Home'
+    const homeBtn = document.createElement('button')
+    homeBtn.textContent = 'Home'
 
-const menuBtn = document.createElement('button')
-menuBtn.textContent = 'Menu'
+    const menuBtn = document.createElement('button')
+    menuBtn.textContent = 'Menu'
 
-const aboutBtn = document.createElement('button')
-aboutBtn.textContent = 'About'
+    const aboutBtn = document.createElement('button')
+    aboutBtn.textContent = 'About'
 
-homeBtn.addEventListener('click', handleHomeEvent)
-menuBtn.addEventListener('click', handleMenuEvent)
-aboutBtn.addEventListener('click', handleAboutEvent)
+    const initialLoad = () =>{
+        //adding event listeners
+        //adding children to respective parent nodes
 
-tabSwitch.appendChild(homeBtn)
-tabSwitch.appendChild(menuBtn)
-tabSwitch.appendChild(aboutBtn)
 
-content.appendChild(tabSwitch)
+        homeBtn.addEventListener('click', handleHomeEvent)
+        menuBtn.addEventListener('click', handleMenuEvent)
+        aboutBtn.addEventListener('click', handleAboutEvent)
 
-page.appendChild(homePage())
-content.appendChild(page)
+
+        tabSwitch.appendChild(homeBtn)
+        tabSwitch.appendChild(menuBtn)
+        tabSwitch.appendChild(aboutBtn)
+
+        content.appendChild(tabSwitch)
+
+        page.appendChild(homePage())
+        content.appendChild(page)
+    }
+
+    return {initialLoad}
+})()
+
+RestarantPage.initialLoad()

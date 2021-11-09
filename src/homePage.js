@@ -4,9 +4,11 @@ function homePage(){
     //div container with id home
     const parentTag = document.createElement('div')
     parentTag.setAttribute('id', 'home')
+    parentTag.classList.add('restPage')
 
     //header
-    const header = document.createElement('h1')
+    const header = document.createElement('header')
+    header.classList.add('title')
     header.textContent = "Welcome to My restaurant"
 
     //image
